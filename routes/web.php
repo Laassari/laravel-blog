@@ -17,5 +17,6 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/posts', 'PostController@index');
-Route::get('/posts/{post_id}', 'PostController@show');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
