@@ -20,7 +20,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
+    <div>
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -34,7 +34,10 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                             <li class="nav-item">
-                                <a href="/posts">posts</a>
+                                <a class="nav-link" href="{{route('posts.index')}}">posts</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('posts.create')}}">create post</a>
                             </li>
                     </ul>
 
@@ -74,7 +77,15 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main class="py-4 container">
+            @if (session()->has('post'))
+                <p class="alert-success alert">
+                    <span>{{ session('post') }} </span>
+                    <button onclick="this.parentElement.remove()" type="button" class="close" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </p>
+            @endif
             @yield('content')
         </main>
     </div>
