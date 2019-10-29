@@ -32,4 +32,37 @@
     <input type="submit" value="update" class="btn btn-success">
 </form>
 
+<hr>
+<h2>change password</h2>
+<form action="{{ route('account.changePassword') }}" method="POST">
+    @method('PUT')
+    @csrf
+    <div class="form-group">
+        <label for="old_password">old password</label>
+        <input type="password" name="old_password" class="form-control" id="old_password">
+    </div>
+    @error('old_password')
+        <div class="alert alert-danger">{{ $message }}</div>
+    @enderror
+
+    <div class="form-group">
+        <label for="new_password">new password</label>
+        <input type="password" name="new_password" class="form-control" id="new_password">
+    </div>
+    @error('new_password')
+        <div class="alert alert-danger">{{ $message }}</div>
+    @enderror
+
+    <div class="form-group">
+            <label for="password">confirm password</label>
+            <input type="password" name="new_password_confirmation" class="form-control" id="new_password_confirmation">
+        </div>
+        @error('new_password_confirmation')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
+    
+    
+
+    <input type="submit" value="change password" class="btn btn-success">
+</form>
 @endsection

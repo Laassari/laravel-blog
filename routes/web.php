@@ -25,3 +25,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/account', 'UserController@show');
 Route::put('/account', 'UserController@update')->name('account.update');
+Route::put('/account/change-password', 'UserController@changePassword')->name('account.changePassword');

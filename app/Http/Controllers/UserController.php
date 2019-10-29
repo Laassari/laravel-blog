@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
-use Validator;
-
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 class UserController extends Controller
 {
     public function __construct()
@@ -37,5 +37,20 @@ class UserController extends Controller
         return redirect('/');
     }
 
-    
+    public function changePassword(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'new_password' => 'required|min:8|max:100',
+            'new_password_confirmation' => 'required|same:new_password',
+        ]);
+        if (Hash::check($request->old_password, $request->user()->password)) {
+            $user = $request->user();
+            $user->password = Hash::make($request->new_password);
+            $user->save();
+            return redirect('/');
+        } else {
+            $validator->errors()->add('old_password', 'old password is incorrect!');
+            return redirect()->back()->withInput()->withErrors($validator);
+        }
+    }
 }
