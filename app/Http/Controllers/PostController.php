@@ -92,7 +92,7 @@ class PostController extends Controller
         ]);
 
 
-        $post = Post::find($post->id)->update([
+        $post->update([
             'title' => $request->title,
             'content' => $request->content,
         ]);
@@ -108,7 +108,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        Post::destroy($post->id);
+        $post->delete();
         session()->flash('post', 'post was deleted successfuly');
         return redirect(route('posts.index'));
     }
