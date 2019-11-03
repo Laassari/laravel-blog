@@ -19,10 +19,15 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::resource('posts', 'PostController');
-
-Route::get('/home', 'HomeController@index')->name('home');
-
 Route::get('/account', 'UserController@show');
 Route::put('/account', 'UserController@update')->name('account.update');
 Route::put('/account/change-password', 'UserController@changePassword')->name('account.changePassword');
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+# posts reources
+Route::resource('posts', 'PostController');
+
+// comments resources
+Route::get('/posts/{post}/comments', 'CommentController@index');
+Route::post('/posts/{post}/comments', 'CommentController@store');
