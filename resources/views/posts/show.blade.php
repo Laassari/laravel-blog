@@ -7,19 +7,22 @@
 
 
     <hr>
-    <h3>new comment</h3>
-    <form action="/posts/{{$post->id}}/comments" method="post">  
-        @csrf
-        <div class="form-group">
-            <label for="content">post content</label>
-            <input type="content" class="form-control mb-3" id="content" name="content" value="{{ old('content') }}"  placeholder="Enter comment">
-            @error('content')
-                <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
+   @auth
+        <h3>new comment</h3>
+        <form action="/posts/{{$post->id}}/comments" method="post">  
+            @csrf
+            <div class="form-group">
+                <label for="content">post content</label>
+                <input type="content" class="form-control mb-3" id="content" name="content" value="{{ old('content') }}"  placeholder="Enter comment">
+                @error('content')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
 
-            <button class="btn btn-success">submit</button>
-        </div>
-    </form>
+                <button class="btn btn-success">submit</button>
+            </div>
+        </form>    
+    @endauth
+
     <h2>Comments</h2>
     @if (!$post->comments->count())
         <p>No comments yet</p>        
@@ -27,9 +30,11 @@
     @foreach($post->comments as $comment)
         <div class="card card-body shadow mb-4">
             <p>{{ $comment->content }}</p>
-            <sub class="text-muted">by {{ $post->user->name }}</sub>
-            <br>
-            <sub class="text-muted">by {{ $comment->created_at->diffForHumans() }}</sub>
+            <div>
+                <span class="text-muted">by {{ $post->user->name }}</span>
+            -
+            <span class="text-muted">{{ $comment->created_at->diffForHumans() }}</span>
+            </div>
         </div>
     @endforeach
     @endif
