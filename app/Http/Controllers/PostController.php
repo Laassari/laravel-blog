@@ -43,7 +43,7 @@ class PostController extends Controller
     {
         $request->validate([
             'title' => 'required|min:5|max:255',
-            'content' => 'required|min:15|max:255',
+            'content' => 'required|min:15',
         ]);
 
         $request->user()->posts()->create([
@@ -88,7 +88,7 @@ class PostController extends Controller
     {
         $request->validate([
             'title' => 'required|min:5|max:255',
-            'content' => 'required|min:15|max:255',
+            'content' => 'required|min:15',
         ]);
 
 
