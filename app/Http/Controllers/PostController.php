@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\PostCreated;
 use App\Post;
 use Illuminate\Http\Request;
 
@@ -41,15 +42,17 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'title' => 'required|min:5|max:255',
             'content' => 'required|min:15',
         ]);
 
-        $request->user()->posts()->create([
-            'title' => $request->title,
-            'content' => $request->content,
-        ]);
+        $post = $request->user()->posts()->create($validatedData);
+
+        \Mail::to($request->user()->email)->send(
+            new PostCreated($post, $request->user())
+        );
+
         session()->flash('post', 'post was created successfuly');
         return redirect(route('posts.index'));
     }
