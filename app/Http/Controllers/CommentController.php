@@ -39,10 +39,11 @@ class CommentController extends Controller
         $validated = $request->validate([
             'content' => 'required|min:3|max:255'
         ]);
-        // dd($validated);
+
         $post->comments()->create([
             'content' => $request->content,
-            'post_id' => $post->id
+            'post_id' => $post->id,
+            'user_id' => $request->user()->id,
         ]);
         return redirect(route('posts.show', ['post' => $post->id]));
     }
