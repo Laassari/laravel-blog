@@ -5,7 +5,12 @@
     <p class="text-muted">{{ $post->created_at->diffForHumans() }} - {{ $post->user->name }}</p>
     <p>{{ $post->content }}</p>
 
-
+    {{-- tags --}}
+    <ul class="p-0">
+        @foreach ($post->tags as $tag)
+        <li class="badge badge-dark d-inline">{{$tag->name}}</li>
+        @endforeach
+    </ul>
     <hr>
    @auth
         <h3>new comment</h3>
