@@ -47,6 +47,7 @@ class PostController extends Controller
         $validatedData = $request->validate([
             'title' => 'required|min:5|max:255',
             'content' => 'required|min:15',
+            'tags' => 'exists:tags,id'
         ]);
 
         $post = $request->user()->posts()->create($validatedData);
@@ -96,6 +97,7 @@ class PostController extends Controller
         $request->validate([
             'title' => 'required|min:5|max:255',
             'content' => 'required|min:15',
+            'tags' => 'exists:tags,id'
         ]);
 
 

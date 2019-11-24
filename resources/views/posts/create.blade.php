@@ -30,6 +30,9 @@
                 </label>
             </div>
         @endforeach
+        @error('tags')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
     </div>
     <input type="submit" value="create post" class="btn btn-primary">
 </form>
