@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\PostCreated;
 use App\Post;
+use App\Tag;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -31,7 +32,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+        $tags = Tag::all();
+        return view('posts.create', ['tags' => $tags]);
     }
 
     /**
@@ -48,6 +50,7 @@ class PostController extends Controller
         ]);
 
         $post = $request->user()->posts()->create($validatedData);
+        $post->tags()->attach($request->tags);
 
         \Mail::to($request->user()->email)->send(
             new PostCreated($post, $request->user())
@@ -77,9 +80,10 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('posts.edit', ['post' => $post]);
+        $tags = Tag::all();
+        return view('posts.edit', ['post' => $post, 'tags' => $tags]);
     }
-
+    
     /**
      * Update the specified resource in storage.
      *
@@ -95,6 +99,7 @@ class PostController extends Controller
         ]);
 
 
+        $post->tags()->syncWithoutDetaching($request->tags);
         $post->update([
             'title' => $request->title,
             'content' => $request->content,

@@ -20,6 +20,17 @@
         @enderror
     </div>
 
+    <div class="form-group">
+        <span>tags</span>
+        @foreach ($tags as $tag)
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="{{ $tag->id }}" name="tags[]" id="defaultCheck-{{ $tag->id }}">
+                <label class="form-check-label" for="defaultCheck-{{ $tag->id }}">
+                    {{ $tag->name }}
+                </label>
+            </div>
+        @endforeach
+    </div>
     <input type="submit" value="create post" class="btn btn-primary">
 </form>
 @endsection

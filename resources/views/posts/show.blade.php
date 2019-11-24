@@ -8,7 +8,9 @@
     {{-- tags --}}
     <ul class="p-0">
         @foreach ($post->tags as $tag)
-        <li class="badge badge-dark d-inline">{{$tag->name}}</li>
+        <li class="badge badge-dark d-inline">
+            <a href="/posts/by-tag/{{$tag->name}}">{{$tag->name}}</a>
+        </li>
         @endforeach
     </ul>
     <hr>
