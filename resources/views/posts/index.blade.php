@@ -29,9 +29,18 @@
                     </div>
                     <p class="card-text">{{  Str::limit($post->content, 50, '...') }}</p>
                 </div>
-                <div class="card-footer text-muted d-flex justify-content-between">
-                    <a href="#" class="card-link">{{ $post->created_at->diffForHumans() }}</a>
-                    <p>by {{ $post->user->name }}</p>
+                <div class="card-footer text-muted d-flex justify-content-between flex-column">
+                    <div class="d-flex justify-content-between">
+                        <span>by {{ $post->user->name }}</span>
+                        <span class="card-link">{{ $post->created_at->diffForHumans() }}</span>
+                    </div>
+                    <div>
+                        @foreach ($post->tags as $tag)
+                            <li class="badge badge-dark d-inline">
+                                <a href="/posts/by-tag/{{$tag->name}}">{{$tag->name}}</a>
+                            </li>
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>
