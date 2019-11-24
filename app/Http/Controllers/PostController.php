@@ -99,7 +99,7 @@ class PostController extends Controller
         ]);
 
 
-        $post->tags()->syncWithoutDetaching($request->tags);
+        $post->tags()->sync($request->tags);
         $post->update([
             'title' => $request->title,
             'content' => $request->content,
