@@ -115,4 +115,9 @@ class PostController extends Controller
         session()->flash('post', 'post was deleted successfuly');
         return redirect(route('posts.index'));
     }
+
+    public function getPostsByTag(Request $request, Tag $tag)
+    {
+        return view('posts.index', ['posts' => $tag->posts]);
+    }
 }
