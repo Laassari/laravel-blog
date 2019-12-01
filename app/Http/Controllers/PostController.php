@@ -127,4 +127,17 @@ class PostController extends Controller
     {
         return view('posts.index', ['posts' => $tag->posts]);
     }
+
+    /**
+     * like/dislik the specified post.
+     *
+     * @param  \App\Post  $post
+     * @return \Illuminate\Http\Response
+     */
+    public function togglePostLike(Request $request, Post $post)
+    {
+        $post->toggleLike();
+        return back();
+    }
+
 }

@@ -28,6 +28,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 # posts reources
 Route::resource('posts', 'PostController');
 Route::get('/posts/by-tag/{tag}', 'PostController@getPostsByTag');
+Route::post('/posts/{post}/toggle-like', 'PostController@togglePostLike');
 
 // comments resources
 Route::get('/posts/{post}/comments', 'CommentController@index');

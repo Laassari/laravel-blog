@@ -5,8 +5,16 @@
     <p class="text-muted">{{ $post->created_at->diffForHumans() }} - {{ $post->user->name }}</p>
     <p>{{ $post->content }}</p>
 
+    {{-- like --}}
+    <form action="/posts/{{ $post->id}}/toggle-like" method="post" class="d-inline-block mr-3">
+        @csrf
+    <button class="btn {{ $post->isLikedBy($post->user) ? 'btn-liked' : 'btn-unliked' }}">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+            <span>Like</span>
+        </button>
+    </form>
     {{-- tags --}}
-    <ul class="p-0">
+    <ul class="p-0 d-inline-block">
         @foreach ($post->tags as $tag)
         <li class="badge badge-dark d-inline">
             <a href="/posts/by-tag/{{$tag->name}}">{{$tag->name}}</a>
@@ -45,4 +53,21 @@
         </div>
     @endforeach
     @endif
+@endsection
+
+@section('head')
+<style>
+    .btn-liked svg{
+        fill: red
+    }
+    .btn-liked:hover svg{
+        fill: transparent
+    }
+    .btn-unliked svg{
+        fill: transparent
+    }
+    .btn-unliked:hover svg{
+        fill: red
+    }
+</style>
 @endsection
