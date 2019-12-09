@@ -14,7 +14,7 @@ This is an application I'm building while learning laravel.
 
 - [ ] paginate posts
 
-- [ ] creating liking a comment
+- [ ] liking a comment
 
 - [ ] replying to a comment
 
