@@ -35,4 +35,9 @@ trait likeable
       );
     }
   }
+
+  public function getLikesCountAttribute()
+  {
+    return $this->likes->count();
+  }
 }
