@@ -33,3 +33,4 @@ Route::post('/posts/{post}/toggle-like', 'PostController@togglePostLike');
 // comments resources
 Route::get('/posts/{post}/comments', 'CommentController@index');
 Route::post('/posts/{post}/comments', 'CommentController@store');
+Route::post('/comments/{comment}/toggle-like', 'CommentController@toggleCommentLike');

@@ -92,4 +92,10 @@ class CommentController extends Controller
     {
         //
     }
+
+    public function toggleCommentLike(Comment $comment)
+    {
+        $comment->toggleLike();
+        return back();
+    }
 }
