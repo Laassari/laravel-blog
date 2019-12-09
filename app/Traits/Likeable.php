@@ -13,8 +13,9 @@ trait likeable
     return $this->morphMany(Like::class, 'likeable');
   }
 
-  public function isLikedBy(User $user)
+  public function isLikedByUser(User $user = null)
   {
+    $user = $user ?: auth()->user();
     return $this->likes()
       ->where('user_id', $user->id)
       ->exists();
