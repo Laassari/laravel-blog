@@ -21,10 +21,10 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|min:3|max:100',
-            'email' => 'required|min:3|max:100',
+            'email' => 'required|min:3|max:100|unique:users,email',
             'image' => 'file',
         ]);
-
+        $path = null;
         if ($request->hasFile('image'))
         {
             $path = $request->image->store('images');
