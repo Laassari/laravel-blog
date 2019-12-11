@@ -14,7 +14,7 @@ This is an application I'm building while learning laravel.
 
 - [ ] search for posts
 
-- [ ] paginate posts
+- [x] paginate posts
 
 - [x] liking a comment
 

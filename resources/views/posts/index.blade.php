@@ -5,9 +5,9 @@
 @if (count($posts) === 0)
     No Posts
 @else
-    <div class="row">
+    <div class="row pt-3">
     @foreach ($posts as $post)
-        <div class="col-4 mb-4">
+        <div class="col-8 mb-4 offset-2">
             <div class="card h-100 text-white bg-dark">
                 <div class="card-body">
                     <div class="d-flex align-items-center">
@@ -27,7 +27,7 @@
                                 </a>
                            @endcanany
                     </div>
-                    <p class="card-text">{{  Str::limit($post->content, 50, '...') }}</p>
+                    <p class="card-text">{{  Str::limit($post->content, 150, '...') }}</p>
                 </div>
                 <div class="card-footer text-muted d-flex justify-content-between flex-column">
                     <div class="d-flex justify-content-between">
@@ -45,6 +45,7 @@
             </div>
         </div>
     @endforeach
+    <div class="d-flex justify-content-center w-100">{{ $posts->links() }}</div>
     </div>
 
 @endif
