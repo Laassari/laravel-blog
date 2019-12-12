@@ -16,6 +16,7 @@ trait likeable
   public function isLikedByUser(User $user = null)
   {
     $user = $user ?: auth()->user();
+    if (!$user) return false;
     return $this->likes()
       ->where('user_id', $user->id)
       ->exists();
