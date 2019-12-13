@@ -18,7 +18,7 @@ This is an application I'm building while learning laravel.
 
 - [x] liking a comment
 
-- [ ] replying to a comment
+- [x] replying to a comment
 
 - [ ] ... & more
 

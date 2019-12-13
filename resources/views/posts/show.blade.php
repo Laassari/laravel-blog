@@ -28,7 +28,7 @@
             @csrf
             <div class="form-group">
                 <label for="content">post content</label>
-                <input type="content" class="form-control mb-3" id="content" name="content" value="{{ old('content') }}"  placeholder="Enter comment">
+                <textarea type="content" class="form-control mb-3" id="content" name="content" value="{{ old('content') }}"  placeholder="Enter comment"></textarea>
                 @error('content')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
@@ -42,10 +42,7 @@
     @if (!$post->comments->count())
         <p>No comments yet</p>        
     @else
-    @foreach($post->comments as $comment)
-        @component('partials.comment', ['comment' => $comment, 'post' => $post])
-        @endcomponent
-    @endforeach
+        @include('partials.commentsList', ['allComments' => $post->comments['root'], 'root' => true])
     @endif
 @endsection
 

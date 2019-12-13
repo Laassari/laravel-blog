@@ -8,7 +8,7 @@ use App\Traits\Likeable;
 class Comment extends Model
 {
     use Likeable;
-    public $fillable = ['content', 'user_id', 'post_id'];
+    public $fillable = ['content', 'user_id', 'post_id', 'parent_id'];
 
     public function post()
     {

@@ -41,13 +41,15 @@ class CommentController extends Controller
     public function store(Request $request, Post $post)
     {
         $validated = $request->validate([
-            'content' => 'required|min:3|max:255'
+            'content' => 'required|min:3|max:255',
+            'parent_id' => 'nullable|exists:comments,id'
         ]);
 
         $post->comments()->create([
             'content' => $request->content,
             'post_id' => $post->id,
             'user_id' => $request->user()->id,
+            'parent_id' => $request->parent_id,
         ]);
         return redirect(route('posts.show', ['post' => $post->id]));
     }
