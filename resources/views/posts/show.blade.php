@@ -39,10 +39,10 @@
     @endauth
 
     <h2>Comments</h2>
-    @if (!$post->comments->count())
+    @if (!$comments->count())
         <p>No comments yet</p>        
     @else
-        @include('partials.commentsList', ['allComments' => $post->comments['root'], 'root' => true])
+        @include('partials.commentsList', ['allComments' => $comments['root'], 'root' => true])
     @endif
 @endsection
 

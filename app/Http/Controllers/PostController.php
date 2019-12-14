@@ -69,6 +69,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
+        $post->load('comments.user');
         $comments = $post->comments->groupBy(function ($elem) {
             if (is_null($elem->parent_id)) {
                 return 'root';
@@ -76,8 +77,7 @@ class PostController extends Controller
                 return $elem->parent_id;
             }
         });
-        $post['comments'] = $comments;
-        return view('posts.show', ['post' => $post]);
+        return view('posts.show', ['post' => $post, 'comments' => $comments]);
     }
 
     /**
