@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<h1 class="">All Posts ({{ count($posts) }})</h1>
+<h1 class="">All Posts ({{ $posts->total() }})</h1>
 @if (count($posts) === 0)
     No Posts
 @else
