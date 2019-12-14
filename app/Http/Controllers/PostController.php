@@ -21,7 +21,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::with('user')->withCount(['comments'=> function($q) {
+        $posts = Post::with('user', 'tags')->withCount(['comments'=> function($q) {
             $q->whereNull('parent_id');
         }])->paginate(15);
         return view('posts.index', ['posts' => $posts]);
