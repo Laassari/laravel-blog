@@ -12,9 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('home', [
-    	'var' => 'this is a variable from php',
-    ]);
+    return redirect('/posts');
 });
 
 Auth::routes();
