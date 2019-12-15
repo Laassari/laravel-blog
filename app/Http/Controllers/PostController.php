@@ -55,7 +55,7 @@ class PostController extends Controller
         $post = $request->user()->posts()->create($validatedData);
         $post->tags()->attach($request->tags);
 
-        \Mail::to($request->user()->email)->send(
+        \Mail::to($request->user()->email)->queue(
             new PostCreated($post, $request->user())
         );
 
