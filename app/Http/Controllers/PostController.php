@@ -19,11 +19,13 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $posts = Post::with('user', 'tags')->withCount(['comments'=> function($q) {
-            $q->whereNull('parent_id');
-        }])->paginate(15);
+        $query = $request->input('query');
+        $posts = Post::with('user', 'tags')
+                ->search($query)
+                ->withCommentsCount()
+                ->paginate(15);
         return view('posts.index', ['posts' => $posts]);
     }
 

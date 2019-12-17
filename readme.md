@@ -12,7 +12,7 @@ This is an application I'm building while learning laravel.
 
 - [x] commenting a post
 
-- [ ] search for posts
+- [x] search for posts
 
 - [x] paginate posts
 

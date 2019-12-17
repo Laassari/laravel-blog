@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+<form action="/posts" method="GET">
+    <div class="input mb-3">
+        <input type="text" name="query" id="query" value="{{ request('query') }}" class="form-control" placeholder="Search ..." aria-label="Search ...">
+    </div>
+</form>
 <h1 class="">All Posts ({{ $posts->total() }})</h1>
 @if (count($posts) === 0)
     No Posts

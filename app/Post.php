@@ -26,4 +26,19 @@ class Post extends Model
     {
         return $this->belongsToMany(\App\Tag::class);
     }
+
+    public function scopeSearch($builder, $query)
+    {
+        $builder->where(function($q) use ($query) {
+            $q->where('title', 'LIKE', "%$query%")
+            ->orWhere('content', 'LIKE', "%$query%");
+        });
+    }
+
+    public function scopeWithCommentsCount($builder)
+    {
+        $builder->withCount(['comments'=> function($q) {
+            $q->whereNull('parent_id');
+        }]);
+    }
 }
