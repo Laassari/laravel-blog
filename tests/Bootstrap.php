@@ -28,6 +28,8 @@ class Bootstrap implements BeforeFirstTestHook, AfterLastTestHook
         $commands = [
             'config:cache',
             'event:cache',
+            'migrate',
+            'db:seed'
         ];
 
         foreach ($commands as $command) {
