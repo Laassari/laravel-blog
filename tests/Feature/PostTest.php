@@ -94,4 +94,21 @@ class PostTest extends TestCase
 
         $this->assertEquals(3, $post->tags->count());
     }
+
+    /** @test */
+    public function a_user_can_like_and_unlike_a_post()
+    {
+        $user = factory('App\User')->create();
+        $author = factory('App\User')->create();
+        $post = factory('App\Post')->create(['user_id' => $author->id]);
+
+        $this->actingAs($user)->post("/posts/$post->id/toggle-like");
+        
+        $this->assertEquals(1, $post->likes->count());
+
+        $this->actingAs($user)->post("/posts/$post->id/toggle-like");
+
+        $this->assertEquals(0, $post->fresh()->likes->count());
+
+    }
 }
