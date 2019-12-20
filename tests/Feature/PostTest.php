@@ -2,6 +2,8 @@
 
 namespace Tests\Feature;
 
+use App\Post;
+use App\Tag;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -59,5 +61,37 @@ class PostTest extends TestCase
 
         $response
             ->assertRedirect('login');
+    }
+
+    /**
+     * @test post creation get tags attached to it
+     *
+     * @return void
+     */
+
+    public function a_post_can_have_tags()
+    {
+        $this->seed("TagsTableSeeder");
+
+        $user = factory('App\User')->create();
+        $this->actingAs($user);
+
+        $three_tags_ids = Tag::limit(3)->get('id')->pluck('id');
+
+        $response = $this->actingAs($user)->post(route('posts.index'), [
+            'title' => 'post title',
+            'content' => 'this is body content that should be stored',
+            'tags' => $three_tags_ids,
+        ]);
+
+        $response->assertStatus(302);
+
+        $response = $this->followRedirects($response);
+
+        $response->assertStatus(200);
+
+        $post = Post::with('tags')->where('title', 'post title')->first();
+
+        $this->assertEquals(3, $post->tags->count());
     }
 }
