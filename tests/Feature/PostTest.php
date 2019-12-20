@@ -99,8 +99,7 @@ class PostTest extends TestCase
     public function a_user_can_like_and_unlike_a_post()
     {
         $user = factory('App\User')->create();
-        $author = factory('App\User')->create();
-        $post = factory('App\Post')->create(['user_id' => $author->id]);
+        $post = factory('App\Post')->create();
 
         $this->actingAs($user)->post("/posts/$post->id/toggle-like");
         
