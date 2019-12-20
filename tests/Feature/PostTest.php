@@ -37,6 +37,11 @@ class PostTest extends TestCase
             ->assertStatus(200)
             ->assertSeeText('post title')
             ->assertSeeText('this is body');
+
+        $this->assertDatabaseHas('posts', [
+            'title' => 'post title',
+            'content' => 'this is body content that should be stored',
+        ]);
     }
 
     /**
