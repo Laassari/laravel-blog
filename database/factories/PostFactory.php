@@ -10,6 +10,6 @@ $factory->define(Post::class, function (Faker $faker) {
     return [
         'title' => $faker->text(50),
         'content' => $faker->paragraph(10),
-        'user_id' => User::first()->id,
+        'user_id' => factory(User::class)->create()->id,
     ];
 });
