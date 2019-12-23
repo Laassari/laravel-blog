@@ -74,4 +74,18 @@ class LikeableTest extends TestCase
 
         $this->assertEquals(2, $comment->likes()->count());
     }
+
+    /** @test */
+    public function it_can_check_if_a_user_liked_a_post()
+    {
+        $post = factory(Post::class)->create();
+        $user = factory(User::class)->create();
+
+        $this->actingAs($user)
+            ->assertFalse($post->isLikedByUser($user));
+
+        $post->toggleLike();
+
+        $this->assertTrue($post->isLikedByUser($user));
+    }
 }
